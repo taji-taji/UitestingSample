@@ -31,6 +31,12 @@ class UitestingSampleUITests: XCTestCase {
     func testExample() {
         
         let app = XCUIApplication()
+        
+        // 「=」ボタンを取得
+        let resultButton = app.buttons["resultButton"]
+        
+        // 「=」ボタンがdisabled
+        XCTAssertFalse(resultButton.enabled)
 
         // 左辺のテキストフィールドを取得
         let leftValueTextField = app.textFields["leftValueTextField"]
@@ -39,12 +45,18 @@ class UitestingSampleUITests: XCTestCase {
         // 12と入力
         leftValueTextField.typeText("12")
         
+        // 「=」ボタンがdisabled
+        XCTAssertFalse(resultButton.enabled)
+        
         // 右辺のテキストフィールドを取得
         let rightValueTextField = app.textFields["rightValueTextField"]
         // 右辺のテキストフィールドをタップしてフォーカスを当てる
         rightValueTextField.tap()
         // 4と入力
         rightValueTextField.typeText("4")
+        
+        // 「=」ボタンがenabled
+        XCTAssertTrue(resultButton.enabled)
         
         // 「=」ボタンをタップ
         app.buttons["resultButton"].tap()
