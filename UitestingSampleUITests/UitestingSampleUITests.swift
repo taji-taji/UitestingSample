@@ -29,8 +29,30 @@ class UitestingSampleUITests: XCTestCase {
     }
     
     func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+
+        // 左辺のテキストフィールドを取得
+        let leftValueTextField = app.textFields["leftValueTextField"]
+        // 左辺のテキストフィールドをタップしてフォーカスを当てる
+        leftValueTextField.tap()
+        // 12と入力
+        leftValueTextField.typeText("12")
+        
+        // 右辺のテキストフィールドを取得
+        let rightValueTextField = app.textFields["rightValueTextField"]
+        // 右辺のテキストフィールドをタップしてフォーカスを当てる
+        rightValueTextField.tap()
+        // 4と入力
+        rightValueTextField.typeText("4")
+        
+        // 「=」ボタンをタップ
+        app.buttons["resultButton"].tap()
+        
+        let resultLabel = app.staticTexts["resultLabel"]
+        
+        // 結果を表示するラベルのテキストが「48.0」になっていれば成功
+        XCTAssertEqual(resultLabel.label, "48.0")
     }
     
 }
